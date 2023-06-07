@@ -12,22 +12,45 @@ function CreateForm(props:CreateFormProps) {
   const [url, setUrl] = useState<string>('');
   const [btnCadastrar, setBtnCadastrar] = useState(true);
 
+  function validateName() {
+    return name.length === 0;
+  }
+  function validateLoginLength() {
+    return login.length === 0;
+  }
+  function validatePasswordLessThanEight() {
+    return password.length < 8;
+  }
+  function validatePasswordMoreThanSixteen() {
+    return password.length > 16;
+  }
+  function validateSpecialCharacters() {
+    const r = /[!@#$%^&*(),.?":{}|<>]/;
+    return !r.test(password);
+  }
   function validateForm() {
-    const r = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?:([0-9a-zA-Z$*&@#])(?!\1)){8,18}$/;
-    return name.length === 0 && login.length === 0;
+    const nameIsInvalid = validateName();
+    const passwordLessThanEight = validatePasswordLessThanEight();
+    const specialCharacters = validateSpecialCharacters();
+    const passwordMoreThanSixteen = validatePasswordMoreThanSixteen();
+    const loginLength = validateLoginLength();
+
+    return nameIsInvalid || passwordLessThanEight
+    || passwordMoreThanSixteen || specialCharacters || loginLength;
+    // && login.length === 0
     // && password !== r;
     // && typeof password !== r;
   }
 
+  //   function validateForm() = {
+  //     if (name.length === 0 ) {
+  //     return setBtnCadastrar(false);
+  //   }
+  // }
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // function validateForm() {
-    //   return name.length === 0;
-    // }
-
     setBtnCadastrar(validateForm());
-    // const retornoValidateForm = validateForm();
   };
   return (
     <>
@@ -53,7 +76,10 @@ function CreateForm(props:CreateFormProps) {
           <input
             type="text"
             id="Login"
-            onChange={ (e) => setLogin(e.target.value) }
+            onChange={ (e) => {
+              setLogin(e.target.value);
+              onSubmit(e);
+            } }
             value={ login }
             required
           />
@@ -63,7 +89,10 @@ function CreateForm(props:CreateFormProps) {
           <input
             type="password"
             id="Senha"
-            onChange={ (e) => setPassword(e.target.value) }
+            onChange={ (e) => {
+              setPassword(e.target.value);
+              onSubmit(e);
+            } }
             value={ password }
             required
           />
