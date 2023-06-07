@@ -28,25 +28,22 @@ function CreateForm(props:CreateFormProps) {
     const r = /[!@#$%^&*(),.?":{}|<>]/;
     return !r.test(password);
   }
+  function validateStringsAndNumbers() {
+    const r = /^[0-9a-zA-Z]*[0-9][0-9a-zA-Z]*$/;
+    return !r.test(password);
+  }
   function validateForm() {
     const nameIsInvalid = validateName();
     const passwordLessThanEight = validatePasswordLessThanEight();
     const specialCharacters = validateSpecialCharacters();
     const passwordMoreThanSixteen = validatePasswordMoreThanSixteen();
     const loginLength = validateLoginLength();
+    const PasswordStringsAndNumbers = validateStringsAndNumbers();
 
     return nameIsInvalid || passwordLessThanEight
-    || passwordMoreThanSixteen || specialCharacters || loginLength;
-    // && login.length === 0
-    // && password !== r;
-    // && typeof password !== r;
+    || passwordMoreThanSixteen || specialCharacters
+    || loginLength || PasswordStringsAndNumbers;
   }
-
-  //   function validateForm() = {
-  //     if (name.length === 0 ) {
-  //     return setBtnCadastrar(false);
-  //   }
-  // }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,10 +51,40 @@ function CreateForm(props:CreateFormProps) {
   };
   return (
     <>
-      {/* <span>Cadastrar nova senha</span> */}
-      {/* <div className="register-container"> */}
-      {/* <div> */}
+
       <form onChange={ validateForm }>
+        <p
+          className={ validatePasswordLessThanEight() ? ('invalid-password-check'
+          )
+
+            : 'valid-password-check' }
+        >
+          Possuir 8 ou mais caracteres
+        </p>
+        <p
+          className={ !validatePasswordMoreThanSixteen() ? ('valid-password-check'
+          )
+
+            : 'invalid-password-check' }
+        >
+          Possuir até 16 caracteres
+        </p>
+        <p
+          className={ !validateStringsAndNumbers() ? ('valid-password-check'
+          )
+
+            : 'invalid-password-check' }
+        >
+          Possuir letras e números
+        </p>
+        <p
+          className={ !validateSpecialCharacters() ? ('valid-password-check'
+          )
+
+            : 'invalid-password-check' }
+        >
+          Possuir algum caractere especial
+        </p>
         <label htmlFor="Nome do serviço">
           Nome do serviço
           <input
