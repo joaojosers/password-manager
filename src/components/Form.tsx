@@ -10,23 +10,40 @@ function CreateForm(props:CreateFormProps) {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [url, setUrl] = useState<string>('');
+  const [btnCadastrar, setBtnCadastrar] = useState(true);
+
+  function validateForm() {
+    const r = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?:([0-9a-zA-Z$*&@#])(?!\1)){8,18}$/;
+    return name.length === 0 && login.length === 0;
+    // && password !== r;
+    // && typeof password !== r;
+  }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  };
 
+    // function validateForm() {
+    //   return name.length === 0;
+    // }
+
+    setBtnCadastrar(validateForm());
+    // const retornoValidateForm = validateForm();
+  };
   return (
     <>
       {/* <span>Cadastrar nova senha</span> */}
       {/* <div className="register-container"> */}
       {/* <div> */}
-      <form onSubmit={ onSubmit }>
+      <form onChange={ validateForm }>
         <label htmlFor="Nome do serviço">
           Nome do serviço
           <input
             type="text"
             id="Nome do serviço"
-            onChange={ (e) => setName(e.target.value) }
+            onChange={ (e) => {
+              setName(e.target.value);
+              onSubmit(e);
+            } }
             value={ name }
             required
           />
@@ -61,11 +78,12 @@ function CreateForm(props:CreateFormProps) {
             required
           />
         </label>
-        <button type="submit">Cadastrar</button>
+        <button disabled={ btnCadastrar } type="submit">Cadastrar </button>
         <button type="button" onClick={ handleCancel }>Cancelar</button>
       </form>
       {/* </div> */}
     </>
   );
 }
+
 export default CreateForm;
