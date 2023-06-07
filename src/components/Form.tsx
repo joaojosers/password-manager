@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-function CreateForm() {
+type CreateFormProps = {
+  handleCancel: () => void;
+
+};
+function CreateForm(props:CreateFormProps) {
+  const { handleCancel } = props;
   const [name, setName] = useState<string>('');
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -20,6 +25,7 @@ function CreateForm() {
           Nome do serviço
           <input
             type="text"
+            id="Nome do serviço"
             onChange={ (e) => setName(e.target.value) }
             value={ name }
             required
@@ -29,6 +35,7 @@ function CreateForm() {
           Login
           <input
             type="text"
+            id="Login"
             onChange={ (e) => setLogin(e.target.value) }
             value={ login }
             required
@@ -38,6 +45,7 @@ function CreateForm() {
           Senha
           <input
             type="password"
+            id="Senha"
             onChange={ (e) => setPassword(e.target.value) }
             value={ password }
             required
@@ -47,13 +55,14 @@ function CreateForm() {
           URL
           <input
             type="text"
+            id="URL"
             onChange={ (e) => setUrl(e.target.value) }
             value={ url }
             required
           />
         </label>
         <button type="submit">Cadastrar</button>
-        <button type="submit">Cancelar</button>
+        <button type="button" onClick={ handleCancel }>Cancelar</button>
       </form>
       {/* </div> */}
     </>
