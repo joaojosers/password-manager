@@ -29,7 +29,7 @@ function CreateForm(props:CreateFormProps) {
     return !r.test(password);
   }
   function validateStringsAndNumbers() {
-    const r = /^[0-9a-zA-Z]*[0-9][0-9a-zA-Z]*$/;
+    const r = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
     return !r.test(password);
   }
   function validateForm() {
