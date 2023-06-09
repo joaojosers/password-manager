@@ -11,6 +11,8 @@ function CreateForm(props:CreateFormProps) {
   const [password, setPassword] = useState<string>('');
   const [url, setUrl] = useState<string>('');
   const [btnCadastrar, setBtnCadastrar] = useState(true);
+  const passwordValid = 'valid-password-check';
+  const passwordInvalid = 'invalid-password-check';
 
   function validateName() {
     return name.length === 0;
@@ -54,34 +56,34 @@ function CreateForm(props:CreateFormProps) {
 
       <form onChange={ validateForm }>
         <p
-          className={ validatePasswordLessThanEight() ? ('invalid-password-check'
+          className={ validatePasswordLessThanEight() ? (passwordInvalid
           )
 
-            : 'valid-password-check' }
+            : passwordValid }
         >
           Possuir 8 ou mais caracteres
         </p>
         <p
-          className={ !validatePasswordMoreThanSixteen() ? ('valid-password-check'
+          className={ !validatePasswordMoreThanSixteen() ? (passwordValid
           )
 
-            : 'invalid-password-check' }
+            : passwordInvalid }
         >
           Possuir até 16 caracteres
         </p>
         <p
-          className={ !validateStringsAndNumbers() ? ('valid-password-check'
+          className={ !validateStringsAndNumbers() ? (passwordValid
           )
 
-            : 'invalid-password-check' }
+            : passwordInvalid }
         >
           Possuir letras e números
         </p>
         <p
-          className={ !validateSpecialCharacters() ? ('valid-password-check'
+          className={ !validateSpecialCharacters() ? (passwordValid
           )
 
-            : 'invalid-password-check' }
+            : passwordInvalid }
         >
           Possuir algum caractere especial
         </p>
