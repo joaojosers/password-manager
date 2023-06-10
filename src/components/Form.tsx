@@ -4,6 +4,11 @@ type CreateFormProps = {
   handleCancel: () => void;
 
 };
+
+// function cadastrarForm() {
+//   return true;
+// }
+
 function CreateForm(props:CreateFormProps) {
   const { handleCancel } = props;
   const [name, setName] = useState<string>('');
@@ -11,6 +16,9 @@ function CreateForm(props:CreateFormProps) {
   const [password, setPassword] = useState<string>('');
   const [url, setUrl] = useState<string>('');
   const [btnCadastrar, setBtnCadastrar] = useState(true);
+
+  // const [btnEnable setBtnEnable] = useState(true);
+
   const passwordValid = 'valid-password-check';
   const passwordInvalid = 'invalid-password-check';
 
@@ -49,12 +57,12 @@ function CreateForm(props:CreateFormProps) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setBtnCadastrar(validateForm());
+    // const inputInfo = { name, login, password, url };
   };
   return (
     <>
 
-      <form onChange={ validateForm }>
+      <form onSubmit={ onSubmit }>
         <p
           className={ validatePasswordLessThanEight() ? (passwordInvalid
           )
@@ -94,7 +102,8 @@ function CreateForm(props:CreateFormProps) {
             id="Nome do serviço"
             onChange={ (e) => {
               setName(e.target.value);
-              onSubmit(e);
+              // onSubmit(e);
+              setBtnCadastrar(validateForm());
             } }
             value={ name }
             required
@@ -107,7 +116,8 @@ function CreateForm(props:CreateFormProps) {
             id="Login"
             onChange={ (e) => {
               setLogin(e.target.value);
-              onSubmit(e);
+              // onSubmit(e);
+              setBtnCadastrar(validateForm());
             } }
             value={ login }
             required
@@ -120,7 +130,8 @@ function CreateForm(props:CreateFormProps) {
             id="Senha"
             onChange={ (e) => {
               setPassword(e.target.value);
-              onSubmit(e);
+              // onSubmit(e);
+              setBtnCadastrar(validateForm());
             } }
             value={ password }
             required
