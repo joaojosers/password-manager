@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type CreateFormProps = {
   handleCancel: () => void;
-
+  addRegister: (inputValues: any) => void;
 };
 
 // function cadastrarForm() {
@@ -10,12 +10,12 @@ type CreateFormProps = {
 // }
 
 function CreateForm(props:CreateFormProps) {
-  const { handleCancel } = props;
+  const { handleCancel, addRegister } = props;
   const [name, setName] = useState<string>('');
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [url, setUrl] = useState<string>('');
-  const [btnCadastrar, setBtnCadastrar] = useState(true);
+  const [btnCadastrarDisabled, setBtnCadastrarDisabled] = useState(true);
 
   // const [btnEnable setBtnEnable] = useState(true);
 
@@ -57,7 +57,14 @@ function CreateForm(props:CreateFormProps) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const inputInfo = { name, login, password, url };
+    const inputValues = {
+      serviceName: e.target['Nome do serviço'].value,
+      login: e.target.Login.value,
+      senha: e.target.Senha.value,
+      url: e.target.URL.value,
+    };
+
+    addRegister(inputValues);
   };
   return (
     <>
@@ -103,7 +110,7 @@ function CreateForm(props:CreateFormProps) {
             onChange={ (e) => {
               setName(e.target.value);
               // onSubmit(e);
-              setBtnCadastrar(validateForm());
+              setBtnCadastrarDisabled(validateForm());
             } }
             value={ name }
             required
@@ -117,7 +124,7 @@ function CreateForm(props:CreateFormProps) {
             onChange={ (e) => {
               setLogin(e.target.value);
               // onSubmit(e);
-              setBtnCadastrar(validateForm());
+              setBtnCadastrarDisabled(validateForm());
             } }
             value={ login }
             required
@@ -131,7 +138,7 @@ function CreateForm(props:CreateFormProps) {
             onChange={ (e) => {
               setPassword(e.target.value);
               // onSubmit(e);
-              setBtnCadastrar(validateForm());
+              setBtnCadastrarDisabled(validateForm());
             } }
             value={ password }
             required
@@ -147,7 +154,7 @@ function CreateForm(props:CreateFormProps) {
             required
           />
         </label>
-        <button disabled={ btnCadastrar } type="submit">Cadastrar </button>
+        <button disabled={ btnCadastrarDisabled } type="submit">Cadastrar </button>
         <button type="button" onClick={ handleCancel }>Cancelar</button>
       </form>
       {/* </div> */}

@@ -6,11 +6,7 @@ import Header from './components/Header';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  // const [addRegister, setAddRegister] = useState([]);
-
-  // function infoRegister() {
-  //   return inputInfo();
-  // }
+  const [registersList, setRegistersList] = useState([]);
 
   function handleBtnClick() {
     setShowForm(true);
@@ -18,11 +14,16 @@ function App() {
   const handleCancel = () => {
     setShowForm(false);
   };
+
+  const addRegister = (inputValues) => {
+    setRegistersList([...registersList, inputValues]);
+  };
+  console.log(registersList);
   return (
     <div>
       <Header />
       {showForm ? (
-        <Form handleCancel={ handleCancel } />
+        <Form handleCancel={ handleCancel } addRegister={ addRegister } />
 
       ) : (
         <button
