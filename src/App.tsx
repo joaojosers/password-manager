@@ -26,12 +26,15 @@ function App() {
         <Form handleCancel={ handleCancel } addRegister={ addRegister } />
 
       ) : (
-        <button
-          type="button"
-          onClick={ handleBtnClick }
-        >
-          Cadastrar nova senha
-        </button>
+        <>
+          <button
+            type="button"
+            onClick={ handleBtnClick }
+          >
+            Cadastrar nova senha
+          </button>
+          <span>     Nenhuma senha cadastrada</span>
+        </>
       ) }
     </div>
 
