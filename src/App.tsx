@@ -24,6 +24,16 @@ function App() {
   const addRegister = (inputValues: InputValues) => {
     setRegistersList([...registersList, inputValues]);
   };
+
+  const removeRegister = (index: number) => () => {
+    const registersListCopy = [...registersList];
+    registersListCopy.splice(index, 1);
+    setRegistersList(registersListCopy);
+    console.log(index);
+    console.log(registersList);
+    console.log(registersListCopy);
+  };
+
   if (showForm) {
     return (<Form
       handleCancel={ handleCancel }
@@ -46,18 +56,27 @@ function App() {
 
       ) : (
         <div>
-          {
-              registersList
-              && registersList.map((register, index) => (
-                <div key={ index }>
-                  <a href={ register.url }>{register.serviceName}</a>
-                  <p>{register.login}</p>
-                  <p>{register.senha}</p>
-                </div>
-              ))
-        }
+          {registersList
+                && registersList.map((register, index) => (
+                  <>
+                    <div key={ index }>
+                      <a href={ register.url }>{register.serviceName}</a>
+                      <p>{register.login}</p>
+                      <p>{register.senha}</p>
+                    </div>
+                    <button
+                      type="button"
+                      data-testid="remove-btn"
+                      onClick={ removeRegister(index) }
+                    >
+                      Remover registro
+                    </button>
+                  </>
+                ))}
         </div>
+
       )}
+
     </div>
   );
 }
