@@ -5,9 +5,12 @@ type CreateFormProps = {
   addRegister: (inputValues: any) => void;
 };
 
-// function cadastrarForm() {
-//   return true;
-// }
+export type InputValuesProps = {
+  serviceName: string,
+  login: string,
+  senha: string,
+  url: string,
+}[];
 
 function CreateForm(props:CreateFormProps) {
   const { handleCancel, addRegister } = props;
@@ -58,12 +61,12 @@ function CreateForm(props:CreateFormProps) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputValues = {
-      serviceName: e.target['Nome do serviço'].value,
-      login: e.target.Login.value,
-      senha: e.target.Senha.value,
-      url: e.target.URL.value,
+      serviceName: name,
+      login,
+      senha: password,
+      url,
     };
-
+    handleCancel();
     addRegister(inputValues);
   };
   return (

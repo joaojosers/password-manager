@@ -1,12 +1,18 @@
 import './App.css';
 import { useState } from 'react';
-import Form from './components/Form';
+import Form, { InputValuesProps } from './components/Form';
 import Header from './components/Header';
-// import { onSubmit } from './components/Form'
+
+type InputValues = {
+  serviceName: string,
+  login: string,
+  senha: string,
+  url: string,
+};
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [registersList, setRegistersList] = useState([]);
+  const [registersList, setRegistersList] = useState<InputValuesProps>([]);
 
   function handleBtnClick() {
     setShowForm(true);
@@ -15,29 +21,45 @@ function App() {
     setShowForm(false);
   };
 
-  const addRegister = (inputValues) => {
+  const addRegister = (inputValues: InputValues) => {
     setRegistersList([...registersList, inputValues]);
   };
-  console.log(registersList);
+  if (showForm) {
+    return (<Form
+      handleCancel={ handleCancel }
+      addRegister={ addRegister }
+    />);
+  }
   return (
     <div>
       <Header />
-      {showForm ? (
-        <Form handleCancel={ handleCancel } addRegister={ addRegister } />
+
+      <button
+        type="button"
+        onClick={ handleBtnClick }
+      >
+        Cadastrar nova senha
+      </button>
+
+      {registersList.length === 0 ? (
+        <span>     Nenhuma senha cadastrada</span>
 
       ) : (
-        <>
-          <button
-            type="button"
-            onClick={ handleBtnClick }
-          >
-            Cadastrar nova senha
-          </button>
-          <span>     Nenhuma senha cadastrada</span>
-        </>
-      ) }
+        <div>
+          {
+              registersList
+              && registersList.map((register, index) => (
+                <div key={ index }>
+                  <a href={ register.url }>{register.serviceName}</a>
+                  <p>{register.login}</p>
+                  <p>{register.senha}</p>
+                </div>
+              ))
+        }
+        </div>
+      )}
     </div>
-
   );
 }
+
 export default App;
