@@ -13,6 +13,7 @@ type InputValues = {
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [registersList, setRegistersList] = useState<InputValuesProps>([]);
+  const [checkbox, setCheckbox] = useState(false);
 
   function handleBtnClick() {
     setShowForm(true);
@@ -50,7 +51,14 @@ function App() {
       >
         Cadastrar nova senha
       </button>
-
+      <label htmlFor="check">
+        Esconder senhas
+        <input
+          id="check"
+          type="checkbox"
+          onChange={ (e) => setCheckbox(e.target.checked) }
+        />
+      </label>
       {registersList.length === 0 ? (
         <span>     Nenhuma senha cadastrada</span>
 
@@ -62,7 +70,8 @@ function App() {
                     <div key={ index }>
                       <a href={ register.url }>{register.serviceName}</a>
                       <p>{register.login}</p>
-                      <p>{register.senha}</p>
+                      { checkbox ? '******' : <p>{register.senha}</p> }
+
                     </div>
                     <button
                       type="button"
