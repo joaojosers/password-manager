@@ -1,6 +1,6 @@
 # password-manager
 
-## Contexto
+# Contexto
 - Desenvolver um gerenciador de senhas.
 
 # A aplicação deverá permitir a pessoa usuária:
@@ -8,8 +8,8 @@
 - Esconder as senhas salvas.
 - Remover os dados armazenados anteriormente.
 
-## Requisitos necessários
-# O projeto implementado deverá:
+# Requisitos necessários
+## O projeto implementado deverá:
 - Ler o estado de um componente e utilizá-lo para alterar o que é exibido na tela.
 - Atualizar o estado de um componente.
 - Atualizar o estado de um componente.
