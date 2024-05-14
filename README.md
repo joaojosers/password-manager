@@ -1,10 +1,30 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# password-manager
+
+## Contexto
+- Desenvolver um gerenciador de senhas.
+
+* A aplicação deverá permitir a pessoa usuária:
+- Cadastrar senhas para serviços que ela utiliza na internet.
+- Esconder as senhas salvas.
+- Remover os dados armazenados anteriormente.
+
+## Requisitos necessários
+* O projeto implementado deverá:
+- Ler o estado de um componente e utilizá-lo para alterar o que é exibido na tela.
+- Atualizar o estado de um componente.
+- Atualizar o estado de um componente.
+- Atualizar o estado de um componente.
+- Renderizar componentes de maneira condicional.
+- Transmitir informações entre componentes por meio de props.
+- Transmitir informações de componentes-filhos para componentes-pais via callbacks.
+
+
+## Executando Testes
+* será utilizada a React Testing Library para a execução dos testes. Para executar todos os testes localmente, executar o comando:
+ ```
+ npm test
+```
+## Arquivos desenvolvidos pela Trybe
+* src:
+  - package.json
+  - package-lock.json
